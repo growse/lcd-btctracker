@@ -16,6 +16,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 while True:
     try:
+        print 'Requesting update'
         r = requests.get(exchange_api)
         prices = r.json()
         prices.pop('timestamp')
@@ -23,7 +24,6 @@ while True:
         for i in range(4):
             for exchange_index in range(0,6):
                 if exchange_index<len(sortedprices):
-                    print sortedprices[exchange_index]
                     lcd.clear()
                     lcd.message("{:<8.8} ${:.2f}\n${:.2f}/{:.2f}".format(
                         sortedprices[exchange_index][1]['display_name'][:8],
